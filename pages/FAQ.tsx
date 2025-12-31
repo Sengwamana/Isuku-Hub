@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { Plus, Minus, Search } from 'lucide-react';
+import { Plus, Minus, Search, HelpCircle } from 'lucide-react';
 import CTA from '../components/CTA';
+import { Link } from 'react-router-dom';
 
 const FAQItem: React.FC<{ question: string; answer: string }> = ({ question, answer }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -8,11 +9,12 @@ const FAQItem: React.FC<{ question: string; answer: string }> = ({ question, ans
   return (
     <div className="border-b border-slate-200">
       <button 
-        className="w-full py-6 flex items-center justify-between text-left focus:outline-none"
+        className="w-full py-6 flex items-center justify-between text-left focus:outline-none group"
         onClick={() => setIsOpen(!isOpen)}
+        aria-expanded={isOpen}
       >
-        <span className={`text-lg font-semibold ${isOpen ? 'text-brand-700' : 'text-slate-900'}`}>{question}</span>
-        <div className={`p-1 rounded-full ${isOpen ? 'bg-brand-100 text-brand-700' : 'bg-slate-100 text-slate-500'} transition-colors`}>
+        <span className={`text-lg font-semibold transition-colors ${isOpen ? 'text-brand-700' : 'text-slate-900 group-hover:text-brand-600'}`}>{question}</span>
+        <div className={`p-1 rounded-full transition-colors flex-shrink-0 ml-4 ${isOpen ? 'bg-brand-100 text-brand-700' : 'bg-slate-100 text-slate-500 group-hover:bg-brand-50 group-hover:text-brand-600'}`}>
            {isOpen ? <Minus size={20} /> : <Plus size={20} />}
         </div>
       </button>
@@ -28,6 +30,8 @@ const FAQItem: React.FC<{ question: string; answer: string }> = ({ question, ans
 };
 
 const FAQ: React.FC = () => {
+  const [searchQuery, setSearchQuery] = useState('');
+
   const faqs = [
     {
       question: "How do I schedule a waste pickup?",
@@ -55,30 +59,53 @@ const FAQ: React.FC = () => {
     }
   ];
 
+  const filteredFaqs = faqs.filter(faq => 
+    faq.question.toLowerCase().includes(searchQuery.toLowerCase()) || 
+    faq.answer.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   return (
     <div className="pt-20">
       <div className="bg-slate-50 py-20 px-4 sm:px-6 lg:px-8 text-center">
         <h1 className="text-4xl font-bold text-slate-900 mb-6">Frequently Asked Questions</h1>
-        <div className="max-w-xl mx-auto relative">
+        <div className="max-w-xl mx-auto relative group">
            <input 
              type="text" 
              placeholder="Search for answers..." 
-             className="w-full pl-12 pr-4 py-4 rounded-full border border-slate-200 focus:border-brand-500 focus:ring-2 focus:ring-brand-200 outline-none shadow-sm"
+             className="w-full pl-12 pr-4 py-4 rounded-full border border-slate-200 focus:border-brand-500 focus:ring-4 focus:ring-brand-50 outline-none shadow-sm transition-all"
+             value={searchQuery}
+             onChange={(e) => setSearchQuery(e.target.value)}
            />
-           <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={20} />
+           <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-brand-500 transition-colors" size={20} />
         </div>
       </div>
 
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-20 min-h-[50vh]">
-         <div className="space-y-2">
-           {faqs.map((faq, idx) => (
-             <FAQItem key={idx} question={faq.question} answer={faq.answer} />
-           ))}
-         </div>
+         {filteredFaqs.length > 0 ? (
+           <div className="space-y-2">
+             {filteredFaqs.map((faq, idx) => (
+               <FAQItem key={idx} question={faq.question} answer={faq.answer} />
+             ))}
+           </div>
+         ) : (
+           <div className="text-center py-10">
+             <div className="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-4 text-slate-400">
+               <HelpCircle size={32} />
+             </div>
+             <h3 className="text-lg font-bold text-slate-900 mb-2">No results found</h3>
+             <p className="text-slate-500 mb-6">We couldn't find any answers matching "{searchQuery}".</p>
+             <button 
+               onClick={() => setSearchQuery('')}
+               className="text-brand-600 font-bold hover:underline"
+             >
+               Clear search
+             </button>
+           </div>
+         )}
 
-         <div className="mt-16 text-center">
+         <div className="mt-16 text-center pt-10 border-t border-slate-100">
             <p className="text-slate-600">Still have questions?</p>
-            <a href="/contact" className="text-brand-600 font-bold hover:underline mt-2 inline-block">Contact our Support Team</a>
+            <Link to="/contact" className="text-brand-600 font-bold hover:underline mt-2 inline-block">Contact our Support Team</Link>
          </div>
       </div>
       <CTA />

@@ -32,12 +32,12 @@ const Hero: React.FC = () => {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 mb-10">
-              <button className="inline-flex items-center justify-center px-8 py-3.5 text-base font-semibold text-white bg-brand-600 rounded-xl hover:bg-brand-700 transition-all shadow-lg shadow-brand-200">
+              <Link to="/signup" className="inline-flex items-center justify-center px-8 py-3.5 text-base font-bold text-white bg-brand-600 rounded-xl hover:bg-brand-700 transition-all shadow-lg shadow-brand-200 hover:-translate-y-1">
                 Start with IsukuHub
                 <ArrowRight size={18} className="ml-2" />
-              </button>
-              <Link to="/dashboard" className="inline-flex items-center justify-center px-8 py-3.5 text-base font-semibold text-slate-700 bg-white border border-slate-200 rounded-xl hover:bg-slate-50 transition-all shadow-sm">
-                View Dashboard
+              </Link>
+              <Link to="/dashboard" className="inline-flex items-center justify-center px-8 py-3.5 text-base font-bold text-slate-700 bg-white border border-slate-200 rounded-xl hover:bg-slate-50 transition-all shadow-sm hover:shadow-md">
+                Live Demo
               </Link>
             </div>
 

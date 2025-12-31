@@ -1,5 +1,6 @@
 import React from 'react';
 import { ArrowUpRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const CTA: React.FC = () => {
   return (
@@ -26,9 +27,9 @@ const CTA: React.FC = () => {
               AI-powered automation that helps you manage your waste collection with clarity and ease.
             </p>
             
-            <button className="inline-flex items-center justify-center px-8 py-4 text-base font-bold text-brand-900 bg-white rounded-full hover:bg-brand-50 transition-colors shadow-lg">
+            <Link to="/signup" className="inline-flex items-center justify-center px-8 py-4 text-base font-bold text-brand-900 bg-white rounded-full hover:bg-brand-50 transition-all shadow-lg active:scale-95">
               Get Started with IsukuHub <ArrowUpRight size={18} className="ml-2" />
-            </button>
+            </Link>
           </div>
         </div>
       </div>

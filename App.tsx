@@ -9,6 +9,8 @@ import Features from './pages/Features';
 import Impact from './pages/Impact';
 import Dashboard from './pages/Dashboard';
 import Resources from './pages/Resources';
+import Login from './pages/Login';
+import Signup from './pages/Signup';
 
 // New Pages
 import About from './pages/About';
@@ -34,11 +36,11 @@ const ScrollToTop = () => {
 
 const LayoutContent: React.FC = () => {
   const location = useLocation();
-  const isDashboard = location.pathname.startsWith('/dashboard');
+  const hideNavFooter = ['/dashboard', '/login', '/signup'].some(path => location.pathname.startsWith(path));
 
   return (
     <div className="min-h-screen bg-slate-50 font-sans selection:bg-brand-200 selection:text-brand-900 flex flex-col">
-      {!isDashboard && <Navbar />}
+      {!hideNavFooter && <Navbar />}
       <main className="flex-grow">
         <Routes>
           <Route path="/" element={<Home />} />
@@ -47,6 +49,8 @@ const LayoutContent: React.FC = () => {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/resources" element={<Resources />} />
           <Route path="/report" element={<ReportIssue />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
           
           {/* Footer / Generic Routes */}
           <Route path="/about" element={<About />} />
@@ -61,7 +65,7 @@ const LayoutContent: React.FC = () => {
           <Route path="*" element={<GenericPage />} />
         </Routes>
       </main>
-      {!isDashboard && <Footer />}
+      {!hideNavFooter && <Footer />}
     </div>
   );
 };

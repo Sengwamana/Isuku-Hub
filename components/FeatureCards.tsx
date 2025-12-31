@@ -1,5 +1,6 @@
 import React from 'react';
 import { Leaf, Clock, BarChart2 } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const FeatureCards: React.FC = () => {
   const features = [
@@ -9,8 +10,9 @@ const FeatureCards: React.FC = () => {
       desc: "Automate daily waste workflows and stay fully in control without the manual coordination.",
       badge: "LIVE",
       color: "bg-brand-50",
+      link: "/features",
       image: (
-        <div className="mt-4 p-4 bg-brand-50/50 rounded-lg border border-brand-100/50">
+        <div className="mt-4 p-4 bg-brand-50/50 rounded-lg border border-brand-100/50 group-hover:bg-brand-50 transition-colors">
            <div className="flex justify-between items-center mb-2">
               <div className="h-2 w-16 bg-brand-200 rounded"></div>
               <div className="h-2 w-8 bg-red-200 rounded"></div>
@@ -31,8 +33,9 @@ const FeatureCards: React.FC = () => {
       desc: "Manage routes, pickups, and payments in minutes instead of hours of phone calls.",
       badge: "AUTO MODE",
       color: "bg-blue-50",
+      link: "/features",
       image: (
-        <div className="mt-4 p-4 bg-blue-50/50 rounded-lg border border-blue-100/50">
+        <div className="mt-4 p-4 bg-blue-50/50 rounded-lg border border-blue-100/50 group-hover:bg-blue-50 transition-colors">
            <div className="flex items-center gap-2 mb-3">
               <div className="w-2 h-2 rounded-full bg-green-500"></div>
               <span className="text-[10px] font-bold text-slate-600">Automation Active</span>
@@ -57,8 +60,9 @@ const FeatureCards: React.FC = () => {
       desc: "AI-powered insights replace manual logs with data-backed confidence.",
       badge: "AI VERIFIED",
       color: "bg-purple-50",
+      link: "/impact",
       image: (
-        <div className="mt-4 p-4 bg-purple-50/50 rounded-lg border border-purple-100/50">
+        <div className="mt-4 p-4 bg-purple-50/50 rounded-lg border border-purple-100/50 group-hover:bg-purple-50 transition-colors">
            <p className="text-xs font-bold text-slate-700 mb-2">Market Insights</p>
            <div className="flex items-end gap-2 h-16">
               <div className="w-6 bg-purple-100 h-[40%] rounded-t-sm"></div>
@@ -85,9 +89,13 @@ const FeatureCards: React.FC = () => {
 
         <div className="grid md:grid-cols-3 gap-8">
           {features.map((feature, idx) => (
-            <div key={idx} className="bg-white rounded-2xl p-6 border border-slate-100 shadow-xl shadow-slate-200/50 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 flex flex-col h-full">
+            <Link 
+                key={idx} 
+                to={feature.link}
+                className="group bg-white rounded-2xl p-6 border border-slate-100 shadow-xl shadow-slate-200/50 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 flex flex-col h-full cursor-pointer"
+            >
               <div className="flex items-start justify-between mb-4">
-                 <div className={`p-3 rounded-xl ${feature.color}`}>
+                 <div className={`p-3 rounded-xl ${feature.color} group-hover:scale-110 transition-transform`}>
                    {feature.icon}
                  </div>
                  {feature.badge && (
@@ -98,15 +106,15 @@ const FeatureCards: React.FC = () => {
               </div>
               
               {/* Mini UI Mockup inside card */}
-              <div className="mb-6 bg-slate-50/50 rounded-lg overflow-hidden border border-slate-100">
+              <div className="mb-6 bg-slate-50/50 rounded-lg overflow-hidden border border-slate-100 transition-colors">
                 {feature.image}
               </div>
 
-              <h3 className="text-xl font-bold text-slate-900 mb-2">{feature.title}</h3>
+              <h3 className="text-xl font-bold text-slate-900 mb-2 group-hover:text-brand-700 transition-colors">{feature.title}</h3>
               <p className="text-sm text-slate-600 leading-relaxed">
                 {feature.desc}
               </p>
-            </div>
+            </Link>
           ))}
         </div>
       </div>

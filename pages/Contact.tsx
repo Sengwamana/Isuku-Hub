@@ -1,7 +1,21 @@
-import React from 'react';
-import { Mail, Phone, MapPin, Send } from 'lucide-react';
+import React, { useState } from 'react';
+import { Mail, Phone, MapPin, Send, CheckCircle } from 'lucide-react';
 
 const Contact: React.FC = () => {
+  const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    // Simulate network request
+    setTimeout(() => {
+      setLoading(false);
+      setSubmitted(true);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, 1500);
+  };
+
   return (
     <div className="pt-20">
       <div className="bg-brand-900 py-20 px-4 sm:px-6 lg:px-8 text-center text-white">
@@ -64,38 +78,53 @@ const Contact: React.FC = () => {
 
           {/* Contact Form */}
           <div className="bg-white p-8 rounded-3xl border border-slate-100 shadow-xl">
-            <h2 className="text-2xl font-bold text-slate-900 mb-6">Send us a message</h2>
-            <form className="space-y-6">
-              <div className="grid md:grid-cols-2 gap-6">
-                <div>
-                  <label htmlFor="name" className="block text-sm font-semibold text-slate-700 mb-2">Full Name</label>
-                  <input type="text" id="name" className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-brand-500 focus:ring-2 focus:ring-brand-200 outline-none transition-all bg-slate-50" placeholder="John Doe" />
+            {submitted ? (
+              <div className="h-full flex flex-col items-center justify-center text-center py-10">
+                <div className="w-20 h-20 bg-green-100 text-green-600 rounded-full flex items-center justify-center mb-6 animate-in zoom-in">
+                  <CheckCircle size={40} />
                 </div>
-                <div>
-                  <label htmlFor="email" className="block text-sm font-semibold text-slate-700 mb-2">Email Address</label>
-                  <input type="email" id="email" className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-brand-500 focus:ring-2 focus:ring-brand-200 outline-none transition-all bg-slate-50" placeholder="john@example.com" />
-                </div>
+                <h3 className="text-2xl font-bold text-slate-900 mb-2">Message Sent!</h3>
+                <p className="text-slate-600 mb-8">We've received your inquiry and will get back to you within 24 hours.</p>
+                <button onClick={() => setSubmitted(false)} className="px-6 py-2 bg-slate-100 text-slate-700 font-bold rounded-lg hover:bg-slate-200">
+                  Send Another Message
+                </button>
               </div>
-              
-              <div>
-                <label htmlFor="subject" className="block text-sm font-semibold text-slate-700 mb-2">Subject</label>
-                <select id="subject" className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-brand-500 focus:ring-2 focus:ring-brand-200 outline-none transition-all bg-slate-50">
-                  <option>General Inquiry</option>
-                  <option>Technical Support</option>
-                  <option>Billing Issue</option>
-                  <option>Partnership Proposal</option>
-                </select>
-              </div>
+            ) : (
+              <>
+                <h2 className="text-2xl font-bold text-slate-900 mb-6">Send us a message</h2>
+                <form onSubmit={handleSubmit} className="space-y-6">
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <div>
+                      <label htmlFor="name" className="block text-sm font-semibold text-slate-700 mb-2">Full Name</label>
+                      <input required type="text" id="name" className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-brand-500 focus:ring-2 focus:ring-brand-200 outline-none transition-all bg-slate-50" placeholder="John Doe" />
+                    </div>
+                    <div>
+                      <label htmlFor="email" className="block text-sm font-semibold text-slate-700 mb-2">Email Address</label>
+                      <input required type="email" id="email" className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-brand-500 focus:ring-2 focus:ring-brand-200 outline-none transition-all bg-slate-50" placeholder="john@example.com" />
+                    </div>
+                  </div>
+                  
+                  <div>
+                    <label htmlFor="subject" className="block text-sm font-semibold text-slate-700 mb-2">Subject</label>
+                    <select id="subject" className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-brand-500 focus:ring-2 focus:ring-brand-200 outline-none transition-all bg-slate-50">
+                      <option>General Inquiry</option>
+                      <option>Technical Support</option>
+                      <option>Billing Issue</option>
+                      <option>Partnership Proposal</option>
+                    </select>
+                  </div>
 
-              <div>
-                <label htmlFor="message" className="block text-sm font-semibold text-slate-700 mb-2">Message</label>
-                <textarea id="message" rows={5} className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-brand-500 focus:ring-2 focus:ring-brand-200 outline-none transition-all bg-slate-50" placeholder="How can we help you?"></textarea>
-              </div>
+                  <div>
+                    <label htmlFor="message" className="block text-sm font-semibold text-slate-700 mb-2">Message</label>
+                    <textarea required id="message" rows={5} className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-brand-500 focus:ring-2 focus:ring-brand-200 outline-none transition-all bg-slate-50" placeholder="How can we help you?"></textarea>
+                  </div>
 
-              <button type="button" className="w-full py-4 bg-brand-600 hover:bg-brand-700 text-white font-bold rounded-xl transition-colors flex items-center justify-center gap-2">
-                Send Message <Send size={18} />
-              </button>
-            </form>
+                  <button type="submit" disabled={loading} className="w-full py-4 bg-brand-600 hover:bg-brand-700 text-white font-bold rounded-xl transition-colors flex items-center justify-center gap-2 disabled:opacity-70">
+                    {loading ? 'Sending...' : 'Send Message'} {!loading && <Send size={18} />}
+                  </button>
+                </form>
+              </>
+            )}
           </div>
 
         </div>

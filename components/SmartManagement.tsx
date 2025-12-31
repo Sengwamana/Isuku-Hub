@@ -1,5 +1,6 @@
 import React from 'react';
 import { Map, RefreshCw, Lightbulb, ArrowUpRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const SmartManagement: React.FC = () => {
   return (
@@ -14,14 +15,14 @@ const SmartManagement: React.FC = () => {
               Effortlessly manage collections, reporting, and recycling goals with AI automation and real-time insights.
             </p>
           </div>
-          <button className="hidden md:flex items-center text-brand-600 font-semibold hover:text-brand-700 transition-colors mt-6 md:mt-0">
-            Explore Features <ArrowUpRight size={18} className="ml-1" />
-          </button>
+          <Link to="/features" className="hidden md:flex items-center text-brand-600 font-semibold hover:text-brand-700 transition-colors mt-6 md:mt-0 group">
+            Explore Features <ArrowUpRight size={18} className="ml-1 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+          </Link>
         </div>
 
         <div className="grid md:grid-cols-3 gap-8">
           {/* Card 1 */}
-          <div className="group bg-slate-50 rounded-[2rem] p-8 border border-slate-100 hover:border-brand-200 transition-all duration-300 relative overflow-hidden">
+          <Link to="/features" className="group bg-slate-50 rounded-[2rem] p-8 border border-slate-100 hover:border-brand-200 transition-all duration-300 relative overflow-hidden block">
             <div className="w-12 h-12 bg-brand-600 rounded-2xl flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform">
               <Map size={24} />
             </div>
@@ -34,10 +35,10 @@ const SmartManagement: React.FC = () => {
                 <ArrowUpRight size={18} />
               </div>
             </div>
-          </div>
+          </Link>
 
           {/* Card 2 */}
-          <div className="group bg-slate-50 rounded-[2rem] p-8 border border-slate-100 hover:border-brand-200 transition-all duration-300 relative overflow-hidden">
+          <Link to="/features" className="group bg-slate-50 rounded-[2rem] p-8 border border-slate-100 hover:border-brand-200 transition-all duration-300 relative overflow-hidden block">
             <div className="w-12 h-12 bg-brand-600 rounded-2xl flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform">
               <RefreshCw size={24} />
             </div>
@@ -50,10 +51,10 @@ const SmartManagement: React.FC = () => {
                 <ArrowUpRight size={18} />
               </div>
             </div>
-          </div>
+          </Link>
 
           {/* Card 3 */}
-          <div className="group bg-slate-50 rounded-[2rem] p-8 border border-slate-100 hover:border-brand-200 transition-all duration-300 relative overflow-hidden">
+          <Link to="/impact" className="group bg-slate-50 rounded-[2rem] p-8 border border-slate-100 hover:border-brand-200 transition-all duration-300 relative overflow-hidden block">
             <div className="w-12 h-12 bg-brand-600 rounded-2xl flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform">
               <Lightbulb size={24} />
             </div>
@@ -66,7 +67,7 @@ const SmartManagement: React.FC = () => {
                 <ArrowUpRight size={18} />
               </div>
             </div>
-          </div>
+          </Link>
         </div>
       </div>
     </section>
