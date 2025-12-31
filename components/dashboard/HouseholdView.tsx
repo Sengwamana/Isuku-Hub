@@ -3,7 +3,7 @@ import StatCard from './StatCard';
 import ChartCard from './ChartCard';
 import MapCard from './MapCard';
 import { CheckCircle, Truck, Leaf, DollarSign } from 'lucide-react';
-import { HouseholdOverview, HouseholdSchedule, HouseholdPayments, HouseholdWasteGuide, HouseholdSupport, HouseholdReport } from '../../pages/Dashboard';
+import { HouseholdOverview, HouseholdSchedule, HouseholdPayments, HouseholdWasteGuide, HouseholdSupport, HouseholdReport, SettingsView } from '../../pages/Dashboard';
 
 export const HouseholdView = ({ activeTab, setActiveTab, isLoading, showToast }: { activeTab: string, setActiveTab: (t: string) => void, isLoading: boolean, showToast: (t: string) => void }) => {
   switch (activeTab) {

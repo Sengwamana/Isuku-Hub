@@ -182,7 +182,7 @@ const AiChatWidget: React.FC<AiChatWidgetProps> = ({ title, subtitle, systemInst
     );
 };
 
-const SettingsView = ({ showToast }: { showToast: (t: string, type?: 'success' | 'error') => void }) => {
+export const SettingsView = ({ showToast }: { showToast: (t: string, type?: 'success' | 'error') => void }) => {
   const [saving, setSaving] = useState(false);
   const handleSave = () => {
     setSaving(true);
@@ -229,7 +229,7 @@ const SettingsView = ({ showToast }: { showToast: (t: string, type?: 'success' |
 
 // --- HOUSEHOLD VIEW COMPONENTS ---
 
-const HouseholdReport = ({ goToOverview, showToast }: { goToOverview: () => void, showToast: (t: string, type?: 'success'|'error') => void }) => {
+export const HouseholdReport = ({ goToOverview, showToast }: { goToOverview: () => void, showToast: (t: string, type?: 'success'|'error') => void }) => {
   const [submitted, setSubmitted] = useState(false);
   const [loadingLoc, setLoadingLoc] = useState(false);
   const [coords, setCoords] = useState<{lat: string, lng: string}>({ lat: '', lng: '' });
@@ -418,7 +418,7 @@ const HouseholdReport = ({ goToOverview, showToast }: { goToOverview: () => void
   )
 }
 
-const HouseholdOverview = ({ isLoading, onNavigate }: { isLoading: boolean, onNavigate: (t: string) => void }) => (
+export const HouseholdOverview = ({ isLoading, onNavigate }: { isLoading: boolean, onNavigate: (t: string) => void }) => (
   <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4">
     <div className="mb-2">
       <h1 className="text-2xl font-bold text-slate-900">My Household Overview</h1>
@@ -482,7 +482,7 @@ const HouseholdOverview = ({ isLoading, onNavigate }: { isLoading: boolean, onNa
   </div>
 );
 
-const HouseholdSchedule = ({ showToast }: { showToast: (t: string) => void }) => {
+export const HouseholdSchedule = ({ showToast }: { showToast: (t: string) => void }) => {
   const [requesting, setRequesting] = useState(false);
 
   const handleRequest = () => {
@@ -522,7 +522,7 @@ const HouseholdSchedule = ({ showToast }: { showToast: (t: string) => void }) =>
   );
 };
 
-const HouseholdPayments = ({ showToast }: { showToast: (t: string) => void }) => {
+export const HouseholdPayments = ({ showToast }: { showToast: (t: string) => void }) => {
     const [balance, setBalance] = useState(5000);
     const [paying, setPaying] = useState(false);
     const [method, setMethod] = useState<'momo'|'card'>('momo');
@@ -599,7 +599,7 @@ const HouseholdPayments = ({ showToast }: { showToast: (t: string) => void }) =>
     );
 };
 
-const HouseholdWasteGuide = () => {
+export const HouseholdWasteGuide = () => {
   const [search, setSearch] = useState('');
   const [aiResult, setAiResult] = useState('');
   const [loading, setLoading] = useState(false);
@@ -680,7 +680,7 @@ const HouseholdWasteGuide = () => {
   );
 };
 
-const HouseholdSupport = () => (
+export const HouseholdSupport = () => (
   <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4">
     <div className="mb-2">
       <h1 className="text-2xl font-bold text-slate-900">Help & Support</h1>
