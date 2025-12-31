@@ -13,6 +13,9 @@ export default defineConfig(({ mode }) => {
       'process.env.API_KEY': JSON.stringify(env.API_KEY),
       'process.env.GOOGLE_MAPS_API_KEY': JSON.stringify(env.GOOGLE_MAPS_API_KEY),
     },
+    optimizeDeps: {
+      include: ['react', 'react-dom', 'react-router-dom', 'lucide-react', '@google/genai', 'react-markdown'],
+    },
     build: {
       outDir: 'dist',
       rollupOptions: {
@@ -21,6 +24,7 @@ export default defineConfig(({ mode }) => {
             'react-vendor': ['react', 'react-dom', 'react-router-dom'],
             'lucide-vendor': ['lucide-react'],
             'genai-vendor': ['@google/genai'],
+            'markdown-vendor': ['react-markdown'],
           }
         }
       }

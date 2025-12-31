@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { GoogleGenAI } from "@google/genai";
 import { Link, useNavigate } from 'react-router-dom';
+import ReactMarkdown from 'react-markdown';
 import DashboardLayout from '../components/dashboard/DashboardLayout';
 import StatCard from '../components/dashboard/StatCard';
 import ChartCard from '../components/dashboard/ChartCard';
@@ -66,7 +67,9 @@ const AiResultBox = ({ loading, result, title }: { loading: boolean, result: str
            <div className="h-4 bg-brand-200/30 rounded w-1/2 animate-pulse"></div>
         </div>
       ) : (
-        <p className="text-sm text-slate-700 leading-relaxed whitespace-pre-wrap">{result}</p>
+        <div className="text-sm text-slate-700 leading-relaxed prose prose-sm prose-slate max-w-none">
+          <ReactMarkdown>{result}</ReactMarkdown>
+        </div>
       )}
     </div>
   );
@@ -151,7 +154,9 @@ const AiChatWidget: React.FC<AiChatWidgetProps> = ({ title, subtitle, systemInst
                         {msg.sender === 'Me' ? userRole.charAt(0).toUpperCase() : 'AI'}
                     </div>
                     <div className={`p-3 rounded-2xl shadow-sm max-w-[80%] ${msg.sender === 'Bot' ? 'bg-white border border-slate-100 rounded-tl-none' : 'bg-brand-600 text-white rounded-tr-none'}`}>
-                        <p className={`text-sm ${msg.sender === 'Bot' ? 'text-slate-700' : 'text-white'}`}>{msg.text}</p>
+                        <div className={`text-sm prose prose-sm max-w-none ${msg.sender === 'Bot' ? 'text-slate-700 prose-slate' : 'text-white prose-invert'}`}>
+                            <ReactMarkdown>{msg.text}</ReactMarkdown>
+                        </div>
                         <p className={`text-[10px] mt-1 text-right ${msg.sender === 'Bot' ? 'text-slate-400' : 'text-brand-200'}`}>{msg.time}</p>
                     </div>
                     </div>
@@ -1305,7 +1310,7 @@ const Dashboard: React.FC = () => {
     setIsLoading(true);
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 1200); // 1.2s fake loading time
+    }, 400); // Reduced from 1.2s for better perceived performance
     return () => clearTimeout(timer);
   }, [userRole, activeTab]);
 
