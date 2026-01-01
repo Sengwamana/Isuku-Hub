@@ -1,20 +1,47 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
 
-# Run and deploy your AI Studio app
+# IsukuHub - Smart Waste Management for Kigali
 
-This contains everything you need to run your app locally.
+IsukuHub is a comprehensive digital platform designed to modernize waste management in Kigali. It connects households, waste collection services, and recyclers to create a cleaner, more sustainable urban environment.
 
-View your app in AI Studio: https://ai.studio/apps/drive/181-xfLFRPAwjTmHZWp7NuuIPK0st5s3X
+## Key Features
 
-## Run Locally
+- **Smart Scheduling**: Optimized waste pickup requests for households.
+- **AI-Powered Route Optimization**: Efficient routing for collection fleets.
+- **Illegal Dumping Reporting**: Geo-tagged reporting to help keep our streets clean.
+- **Recycling Tracking**: Monitor recycling rates and impact.
+- **Secure Payments**: Integrated payment system for waste management services.
 
-**Prerequisites:**  Node.js
+## Getting Started
 
+### Prerequisites
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+- [Node.js](https://nodejs.org/) (v18 or higher)
+- [npm](https://www.npmjs.com/)
+
+### Installation
+
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/Sengwamana/Isuku-Hub.git
+   cd Isuku-Hub
+   ```
+
+2. **Install dependencies:**
+   ```bash
+   npm install
+   ```
+
+3. **Environment Setup:**
+   Create a `.env` file in the root directory and add your Gemini API key:
+   ```env
+   VITE_GEMINI_API_KEY=your_api_key_here
+   ```
+
+4. **Run the development server:**
+   ```bash
+   npm run dev
+   ```
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
